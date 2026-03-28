@@ -4,7 +4,7 @@
   "description": "非公式の JavaScript 向け Karotter API クライアント",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build",
     "format": "prettier --write .",
     "lint": "eslint",
     "prepare": "pnpm build"
