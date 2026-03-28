@@ -30,7 +30,8 @@
     "axios": "^1.13.6"
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -39,5 +40,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Cheesecake2960/karotter-js.git"
-  }
+  },
+  "types": "dist/index.d.ts"
 }
