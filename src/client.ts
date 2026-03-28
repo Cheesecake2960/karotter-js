@@ -1,5 +1,5 @@
 import type { PostType } from "../types/post.js"
-import type { UserInfoType } from "../types/user.js"
+import type { UserInfoType, UserType } from "../types/user.js"
 import { Axios } from "axios"
 
 export class Client extends Axios {
@@ -7,14 +7,14 @@ export class Client extends Axios {
     super({ baseURL: "https://karotter.com", headers: { "X-API-Key": apiKey } })
   }
 
-  async getUser(userName: string) {
+  async getUser(userName: UserType["username"]) {
     const data = await this.get<UserInfoType>(`/api/users/${userName}`).then(
       (res) => res.data,
     )
     return data
   }
 
-  async getPost(id: number) {
+  async getPost(id: PostType["id"]) {
     const data = await this.get<PostType>(`/api/posts/${id}`).then(
       (res) => res.data,
     )
