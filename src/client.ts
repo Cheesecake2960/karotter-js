@@ -1,5 +1,5 @@
 import type { PostType } from "../types/post.js"
-import type { UserInfoType } from "../types/user.js"
+import type { UserInfoType, UserType } from "../types/user.js"
 import axios, { type Axios } from "axios"
 
 export class Client {
@@ -13,15 +13,15 @@ export class Client {
       headers: { "X-API-Key": this.apiKey },
     })
   }
-
-  async getUser(userName: string) {
+  
+  async getUser(userName: UserType["username"]) {
     const data = await this.client
       .get<UserInfoType>(`/api/users/${userName}`)
       .then((res) => res.data)
     return data
   }
 
-  async getPost(id: number) {
+  async getPost(id: PostType["id"]) {
     const data = await this.client
       .get<PostType>(`/api/posts/${id}`)
       .then((res) => res.data)
