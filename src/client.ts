@@ -1,5 +1,5 @@
-import type { PostType } from "./types/post.js"
-import type { UserInfoType } from "./types/user.js"
+import type { PostType } from "../types/post.js"
+import type { UserInfoType } from "../types/user.js"
 import { Axios } from "axios"
 
 export class Client extends Axios {
