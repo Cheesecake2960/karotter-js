@@ -1,5 +1,25 @@
 import type { PostType } from "./post.d.ts"
 
+/** 公式マーク
+ * BLUE:    本人マーク
+ * YELLOW:  認証済み団体マーク
+ * ORANGE:  認証済みマーク
+ * PURPLE:  運営マーク
+ * GRAY:    政府関係者マーク
+ * BLACK:   認証済みマーク
+ * RED:     認証済みマーク
+ * GREEN:   認証済みマーク
+ */
+export type OfficialMarkType =
+  | "BLUE"
+  | "YELLOW"
+  | "ORANGE"
+  | "PURPLE"
+  | "GRAY"
+  | "BLACK"
+  | "RED"
+  | "GREEN"
+
 export type UserType = {
   /** ユーザーのユニークなID */
   id: number
@@ -37,13 +57,8 @@ export type UserType = {
   /** 誕生日の風船演出が有効かどうか */
   birthdayBalloonsEnabled: boolean
 
-  /** 公式マーク
-   * - `NONE`: なし
-   * - `BLUE`: 青
-   * - `YELLOW`: 黄
-   * - `PURPLE`: 紫
-   */
-  officialMark: "NONE" | "BLUE" | "YELLOW" | "PURPLE" // OTHERS?
+  /** 公式マーク */
+  officialMark: OfficialMarkType[]
 
   /** ボット属性がついているかどうか */
   isBotAccount: boolean
