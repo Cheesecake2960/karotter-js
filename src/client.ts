@@ -20,7 +20,6 @@ export class Client {
     })
 
     this.client.interceptors.request.use((config) => {
-      console.log("Access token not set", config.url)
       if (this.accessToken) {
         config.headers["Authorization"] = `Bearer ${this.accessToken}`
       }
@@ -65,7 +64,6 @@ export class Client {
       .then((res) => res.data)
 
     this.accessToken = data.accessToken
-    console.log("access token ok")
 
     return data
   }
