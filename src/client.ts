@@ -1,3 +1,4 @@
+import type { BoardType, ReplyType, ThreadType } from "../types/board.js"
 import type { FollowersInfoType } from "../types/follow.js"
 import type { LoginResponseType } from "../types/login.js"
 import type { PostType } from "../types/post.js"
@@ -139,6 +140,31 @@ export class Client {
       .get(
         `/api/posts/recommended?limit=${options?.limit ?? 12}&mode=${mode ?? "latest"}${options?.cursor ? `&cursor=${options.cursor}` : ""}`,
       )
+      .then((res) => res.data)
+    return data
+  }
+
+  async getBoards() {
+    const data = await this.client
+      .get<{ boards: BoardType[] }>("/api/boards")
+      .then((res) => res.data)
+    return data
+  }
+
+  async getBoardInfo(slug: BoardType["slug"]) {
+    const data = await this.client
+      .get<{ board: BoardType; threads: ThreadType[] }>(`/api/boards/${slug}`)
+      .then((res) => res.data)
+    return data
+  }
+
+  async getThread(slug: BoardType["slug"], id: ThreadType["id"]) {
+    const data = await this.client
+      .get<{
+        board: BoardType
+        replies: ReplyType[]
+        thread: ThreadType
+      }>(`/api/boards/${slug}/threads/${id}`)
       .then((res) => res.data)
     return data
   }
