@@ -1,6 +1,6 @@
 {
   "name": "karotter-js",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "非公式の JavaScript 向け Karotter API クライアント",
   "main": "dist/index.js",
   "scripts": {
