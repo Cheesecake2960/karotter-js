@@ -105,4 +105,41 @@ export class Client {
       .then((res) => res.data)
     return data
   }
+
+  async getRecommended(
+    mode?: "latest" | "algorithm",
+    options?: { limit?: number; cursor?: number },
+  ): Promise<{
+    pagination: {
+      limit: 12
+      mode: "latest"
+      page: 1
+    }
+    posts: (PostType & { type: "POST" | "REKAROT" })[]
+  }>
+
+  async getRecommended(
+    mode: "beta",
+    options?: { limit?: number; cursor?: number },
+  ): Promise<{
+    betaVariant: "A" | "B" | "C" | "D" | "E"
+    pagination: {
+      limit: 12
+      mode: "latest"
+      page: 1
+    }
+    posts: (PostType & { type: "POST" | "REKAROT" })[]
+  }>
+
+  async getRecommended(
+    mode?: "latest" | "algorithm" | "beta",
+    options?: { limit?: number; cursor?: number },
+  ) {
+    const data = await this.client
+      .get(
+        `/api/posts/recommended?limit=${options?.limit ?? 12}&mode=${mode ?? "latest"}${options?.cursor ? `&cursor=${options.cursor}` : ""}}`,
+      )
+      .then((res) => res.data)
+    return data
+  }
 }
