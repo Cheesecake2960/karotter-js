@@ -137,7 +137,7 @@ export class Client {
   ) {
     const data = await this.client
       .get(
-        `/api/posts/recommended?limit=${options?.limit ?? 12}&mode=${mode ?? "latest"}${options?.cursor ? `&cursor=${options.cursor}` : ""}}`,
+        `/api/posts/recommended?limit=${options?.limit ?? 12}&mode=${mode ?? "latest"}${options?.cursor ? `&cursor=${options.cursor}` : ""}`,
       )
       .then((res) => res.data)
     return data
