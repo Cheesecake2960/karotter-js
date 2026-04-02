@@ -1,3 +1,4 @@
+import type { ReactionSummaryType } from "./reaction.js"
 import type { UserType } from "./user.js"
 
 export type BoardType = {
@@ -67,7 +68,7 @@ export type ThreadType = {
   lastReplyAt: string
 
   /** 投稿に対して行われたリアクション。 */
-  reactionSummary: { emoji: string; count: number; reacted: boolean }[]
+  reactionSummary: ReactionSummaryType[]
 
   /** 返信の数。 */
   replyCount: number
