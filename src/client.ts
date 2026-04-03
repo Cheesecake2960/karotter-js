@@ -6,6 +6,7 @@ import type {
   NotificationType,
 } from "../types/notification.js"
 import type { PostType } from "../types/post.js"
+import type { TrendType } from "../types/trend.js"
 import type { UserInfoType, UserType } from "../types/user.js"
 import axios, { type Axios } from "axios"
 
@@ -190,6 +191,15 @@ export class Client {
       }>(
         `/api/notifications?page=${options?.page ?? 1}&limit=${options?.limit ?? 15}${options?.types ? `&types=${options.types}` : ""}`,
       )
+      .then((res) => res.data)
+    return data
+  }
+
+  async getTrends(options?: { limit?: number }) {
+    const data = await this.client
+      .get<{
+        trends: TrendType[]
+      }>(`/api/search/trending/topics?limit=${options?.limit ?? 5}`)
       .then((res) => res.data)
     return data
   }
