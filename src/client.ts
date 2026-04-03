@@ -188,7 +188,7 @@ export class Client {
           page: number
         }
       }>(
-        `/api/notifications?page=${options?.page ?? 1}&limit=${options?.limit ?? 15}`,
+        `/api/notifications?page=${options?.page ?? 1}&limit=${options?.limit ?? 15}${options?.types ? `&types=${options.types}` : ""}`,
       )
       .then((res) => res.data)
     return data
