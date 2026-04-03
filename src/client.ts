@@ -173,7 +173,7 @@ export class Client {
     return data
   }
 
-  async getNotification(options?: {
+  async getNotifications(options?: {
     page?: number
     limit?: number
     types?: NotificationKindType
