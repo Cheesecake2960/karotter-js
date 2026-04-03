@@ -17,6 +17,9 @@ export type PollOption = {
 
   /** 選択肢を選んだ人の人数 */
   votesCount: number
+
+  /** 選択肢に割り当てられた画像のURL */
+  imageUrl: string | null
 }
 
 /** 投稿に作成することができる投票 */
