@@ -1,6 +1,10 @@
 import type { BoardType, ReplyType, ThreadType } from "../types/board.js"
 import type { FollowersInfoType } from "../types/follow.js"
 import type { LoginResponseType } from "../types/login.js"
+import type {
+  NotificationKindType,
+  NotificationType,
+} from "../types/notification.js"
 import type { PostType } from "../types/post.js"
 import type { UserInfoType, UserType } from "../types/user.js"
 import axios, { type Axios } from "axios"
@@ -165,6 +169,27 @@ export class Client {
         replies: ReplyType[]
         thread: ThreadType
       }>(`/api/boards/${slug}/threads/${id}`)
+      .then((res) => res.data)
+    return data
+  }
+
+  async getNotification(options?: {
+    page?: number
+    limit?: number
+    types?: NotificationKindType
+  }) {
+    const data = await this.client
+      .get<{
+        notifications: NotificationType[]
+        pagination: {
+          hasMore: boolean
+          limit: number
+          nextPage: number
+          page: number
+        }
+      }>(
+        `/api/notifications?page=${options?.page ?? 1}&limit=${options?.limit ?? 15}`,
+      )
       .then((res) => res.data)
     return data
   }
