@@ -126,8 +126,9 @@ export type PostType = {
   /** 投稿の閲覧が可能なユーザー
    * - `PUBLIC`: 全員
    * - `CIRCLE`: `viewerCircle`に属するユーザー
+   * - `FOLLOWERS`: フォロワーのみ
    */
-  visibility: "PUBLIC" | "CIRCLE"
+  visibility: "PUBLIC" | "CIRCLE" | "FOLLOWERS"
 
   /** 投稿の作者 */
   author: AuthorType
