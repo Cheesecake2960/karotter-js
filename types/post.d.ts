@@ -232,3 +232,17 @@ export type PostType = {
    */
   canQuote: boolean
 }
+
+export type NewPostType = Pick<
+  PostType,
+  | "content"
+  | "isAiGenerated"
+  | "isPromotional"
+  | "isR18"
+  | "hideFromMinors"
+  | "visibility"
+  | "replyRestriction"
+  | "mediaAlts"
+  | "mediaSpoilerFlags"
+  | "mediaR18Flags"
+>
