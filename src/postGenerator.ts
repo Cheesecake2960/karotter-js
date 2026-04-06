@@ -23,5 +23,7 @@ export class PostGenerator implements NewPostType {
     this.mediaAlts.push(alt ?? "")
     this.mediaSpoilerFlags.push(spoilerFlag ?? false)
     this.mediaR18Flags.push(R18Flag ?? false)
+
+    content
   }
 }
