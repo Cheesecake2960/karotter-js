@@ -17,7 +17,7 @@ export class PostGenerator implements NewPostType {
   }
   
   /**
-  * @deprecated 未実装
+  * @deprecated この機能は未実装です。
   */
   addMedia({content, alt, spoilerFlag, R18Flag}: {content: unknown, alt?: string, spoilerFlag?: boolean, R18Flag?: boolean}) {
     this.mediaAlts.push(alt ?? "")

@@ -229,9 +229,14 @@ export class Client {
 
   async createNewPost(post: NewPostType) {
     const formData = new FormData();
-    
-    (Object.keys(post) as (keyof NewPostType)[]).forEach(key => {
-      formData.append(key, post[key])
+
+    (Object.entries(post) as [keyof NewPostType, NewPostType[keyof NewPostType]][])
+      .forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          formData.append(String(key), JSON.stringify(value))
+          return
+        }
+        formData.append(String(key), String(value))
     })
 
     const data = await this.client.post<{message: string, post: PostType}>("/api/posts", formData).then(res => res.data)
