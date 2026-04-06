@@ -5,7 +5,7 @@ import type {
   NotificationKindType,
   NotificationType,
 } from "../types/notification.js"
-import type { PostType } from "../types/post.js"
+import type { NewPostType, PostType } from "../types/post.js"
 import type { QuestionType } from "../types/question.js"
 import type { TrendType } from "../types/trend.js"
 import type { UserInfoType, UserType } from "../types/user.js"
@@ -15,6 +15,7 @@ export class Client {
   private apiKey: string | undefined
   private client: Axios
   private accessToken: string | undefined
+  private csrfToken: string | undefined
 
   constructor(apiKey?: string) {
     this.apiKey = apiKey
@@ -29,6 +30,7 @@ export class Client {
     this.client.interceptors.request.use((config) => {
       if (this.accessToken) {
         config.headers["Authorization"] = `Bearer ${this.accessToken}`
+        config.headers["X-Csrf-Token"] = this.csrfToken
       }
       return config
     })
@@ -207,8 +209,38 @@ export class Client {
 
   async getInbox() {
     const data = await this.client
-      .get<{questions: QuestionType[], unreadCount: number}>("/api/social/questions/inbox")
+      .get<{
+        questions: QuestionType[]
+        unreadCount: number
+      }>("/api/social/questions/inbox")
       .then((res) => res.data)
+    return data
+  }
+
+  async getCsrfToken() {
+    const data = await this.client
+      .get<{ csrfToken: string }>("/api/auth/csrf-token")
+      .then((res) => res.data)
+
+    this.csrfToken = data.csrfToken
+
+    return data
+  }
+
+  async createNewPost(post: NewPostType) {
+    const formData = new FormData();
+
+    (Object.entries(post) as [keyof NewPostType, NewPostType[keyof NewPostType]][])
+      .forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          formData.append(String(key), JSON.stringify(value))
+          return
+        }
+        formData.append(String(key), String(value))
+    })
+
+    const data = await this.client.post<{message: string, post: PostType}>("/api/posts", formData).then(res => res.data)
+
     return data
   }
 }
